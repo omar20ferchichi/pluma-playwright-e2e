@@ -1,16 +1,21 @@
 import { test as base, expect, Page } from "@playwright/test";
+import fs from "fs";
 import path from "path";
-import { createLoggedInPage } from "../configuration/login";
-import { endTestLog, startTestLog, testCaseFileBase } from "../configuration/logger";
+import { config } from "../configuration/config";
+import { LoggedInState, restoreSessionStorage, saveLoggedInState } from "../configuration/login";
+import { endTestLog, logger, startTestLog, testCaseFileBase } from "../configuration/logger";
+import { reportPath } from "../configuration/reportRun";
 
 type TestFixtures = {
   /** Automatic: gives every test case its own reports/<run>/logs/<spec>__<title>.log */
   testLog: void;
+  /** A logged-in page in the test's own browser context, so each test gets its own trace. */
+  loggedInPage: Page;
 };
 
 type WorkerFixtures = {
-  /** One logged-in page per worker, reused by every test of that worker (login happens once, only if a test uses it). */
-  loggedInPage: Page;
+  /** The saved session. Login happens once per worker, and only if a test needs it. */
+  authState: LoggedInState;
 };
 
 /**
@@ -33,14 +38,32 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
     },
     { auto: true },
   ],
-  loggedInPage: [
-    async ({ browser }, use) => {
-      const page = await createLoggedInPage(browser);
-      await use(page);
-      await page.context().close();
+
+  authState: [
+    async ({ browser }, use, workerInfo) => {
+      const file = reportPath(".auth", `worker-${workerInfo.workerIndex}.json`);
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      await use(await saveLoggedInState(browser, file));
+      fs.rmSync(file, { force: true }); // holds session tokens: don't leave it in the report
     },
     { scope: "worker" },
   ],
+
+  // Every `page` starts logged in from the saved session. Playwright's own `page` fixture records
+  // the trace, so each test gets its own. tests/auth resets this to a logged-out state.
+  storageState: async ({ authState }, use) => {
+    await use(authState.storageFile);
+  },
+
+  loggedInPage: async ({ page, authState }, use) => {
+    await restoreSessionStorage(page, authState);
+    await page.goto(config.auth.homePath);
+    if (/\/login\b/.test(new URL(page.url()).pathname)) {
+      throw new Error(`The saved session was not accepted: ${page.url()} is the login page`);
+    }
+    logger.info(`Session restored, on ${new URL(page.url()).pathname}`);
+    await use(page);
+  },
 });
 
 export { expect };

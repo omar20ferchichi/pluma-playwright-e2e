@@ -10,7 +10,7 @@ a real QA project would be: a layered architecture, test cases written as data, 
 and strict rules so it can run safely against a **live production account**.
 
 > **Results:** 114 tests: 10 end-to-end business flows, 21 feature scenarios, every page and sidebar link,
-> and the framework's own unit tests. All 114 pass, in about 5 minutes.
+> and the framework's own unit tests. All 114 pass in about 7 minutes, and each test leaves a Playwright trace you can replay.
 
 ---
 
@@ -36,7 +36,7 @@ and strict rules so it can run safely against a **live production account**.
 | **Test architecture**: Page Object Model plus small reusable steps (TestPoints) | [`src/pages/`](src/pages), [`src/testpoint/`](src/testpoint) |
 | **End-to-end testing**: create data, check it across views and reloads, clean up | [`src/pages/calendar.page.ts`](src/pages/calendar.page.ts), `E2E-01 … E2E-10` |
 | **Data-driven tests**: scenarios written in a CSV test plan, with specs generated from it | [`docs/test_scenarios/`](docs/test_scenarios), [`scripts/split-scenarios.ts`](scripts/split-scenarios.ts) |
-| **Reporting**: HTML, one JSON per test case, one log per test case, Markdown summary | [`src/configuration/plumaReporter.ts`](src/configuration/plumaReporter.ts), [`src/testpoint/testCaseReport.ts`](src/testpoint/testCaseReport.ts) |
+| **Reporting**: HTML, plus one JSON, one log and one Playwright trace per test case, and a Markdown summary | [`src/configuration/plumaReporter.ts`](src/configuration/plumaReporter.ts), [`src/testpoint/testCaseReport.ts`](src/testpoint/testCaseReport.ts) |
 | **Robust locators** in an app with no `data-testid` attributes | [`src/pages/BasePage.ts`](src/pages/BasePage.ts) |
 | **Tests for the framework itself** | [`tests/framework/`](tests/framework) |
 | **Config and secrets**: YAML defaults overridden by `.env`; no credentials in the code | [`src/configuration/config.ts`](src/configuration/config.ts) |
@@ -57,7 +57,7 @@ cp .env.example .env     # then set PLUMA_EMAIL and PLUMA_PASSWORD
 npm run test:framework   # no login needed: framework unit tests and CSV checks (a few seconds)
 npm run test:smoke       # fast check that login and the main pages work
 npm run test:scenarios   # the 31 business scenarios, E2E-01 … E2E-10 included
-npm test                 # the whole suite (114 tests, about 5 min)
+npm test                 # the whole suite (114 tests, about 7 min)
 npm run report           # open the HTML report of the latest run
 ```
 
@@ -67,6 +67,8 @@ npm run report           # open the HTML report of the latest run
 | `PLUMA_BASE_URL` | Application under test | `https://app.pluma.ai` |
 | `PLUMA_HEADLESS` | `false` opens a visible browser | `true` |
 | `PLUMA_SLOW_MO_MS` | Delay between actions, for demos | `0` |
+| `PLUMA_TRACE` | Playwright trace of each test: `on`, `off`, `retain-on-failure`, `on-first-retry` | `on` |
+| `PLUMA_VIDEO` | Video of each test (same values) | `off` |
 
 ---
 
@@ -87,7 +89,7 @@ The layers:
 - **Specs** describe *what* is tested. They read like a test plan and contain no selectors.
 - **TestPoints** are small steps with an ID, such as `TP-ACT-CALENDAR-09` (create a task). Many scenarios reuse them.
 - **Page objects** hide *how* a page is driven: its locators, waits and quirks. A UI change is fixed in one place.
-- **Infrastructure**: a worker-scoped fixture logs in **once** and every test reuses the session. Config is read from YAML and overridden by `.env`.
+- **Infrastructure**: a worker-scoped fixture logs in **once** and saves the session. Each test then opens its own browser context from it, so every test gets its **own Playwright trace** without logging in again. Config is read from YAML and overridden by `.env`.
 
 ---
 
@@ -180,9 +182,10 @@ Each run writes to `reports/<timestamp>/`, and `reports/latest` always points to
 
 | Output | For whom | Content |
 |---|---|---|
-| `html/` | Developers | Playwright HTML report. Each TestPoint is a step, with a screenshot, video and trace when a test fails |
-| `summary.md` / `summary.json` | Managers, CI | One line per test. Rewritten after **every** test, so even a stopped run has a summary |
-| `testcases/<test>.json` | QA, dashboards | **One per test case**: every TestPoint with its status (`passed` / `failed` / `not-run`), timings, URLs, error and phase (`test` / `teardown`) |
+| `html/` | Developers | Playwright HTML report. Each TestPoint is a step, and every test has a **View trace** button |
+| `artifacts/<test>/trace.zip` | Developers, QA | **Playwright trace of every test**: the same view as Playwright's UI mode (see below) |
+| `summary.md` / `summary.json` | Managers, CI | One line per test with a link to its trace. Rewritten after **every** test, so even a stopped run has a summary |
+| `testcases/<test>.json` | QA, dashboards | **One per test case**: every TestPoint with its status (`passed` / `failed` / `not-run`), timings, URLs, error and phase (`test` / `teardown`), plus the path of its trace |
 | `logs/<test>.log` | Debugging | **One per test case**, with the same name as its JSON: each step with a timestamp, and a final `Result:` line |
 | `results.json` | Tools | Playwright's full JSON report |
 
@@ -198,9 +201,31 @@ Example test case JSON:
     { "step": 2, "id": "TP-ACT-CALENDAR-09", "description": "Create task \"QA-E2E E2E-01 22202255\"",
       "phase": "test", "execution": "passed", "durationMs": 2925,
       "urlBefore": "/app/calendar?view=board", "urlAfter": "/app/calendar?view=board" }
-  ]
+  ],
+  "recordings": {
+    "trace": "artifacts/scenarios-E2E-01-…-chromium/trace.zip",
+    "viewTrace": "npx playwright show-trace reports/<run>/artifacts/scenarios-E2E-01-…-chromium/trace.zip"
+  }
 }
 ```
+
+### Replaying a test in the Trace Viewer
+
+Every test records a Playwright trace. Opening one gives the same screen as Playwright's UI mode, for a test that has already run:
+
+- the actions, **grouped by TestPoint** (`TP-ACT-CALENDAR-09 Create task …`);
+- a timeline you can scrub through;
+- the DOM snapshot **before, during and after** each action, which you can inspect like a live page;
+- the locator used, plus the console, network calls and source code of each step.
+
+Ways to open a trace:
+
+```bash
+npm run report                                   # HTML report → open a test → "View trace"
+npm run trace -- reports/latest/artifacts/<test>/trace.zip
+```
+
+You can also drop the `trace.zip` file on [trace.playwright.dev](https://trace.playwright.dev); it opens locally in the browser. To watch tests live instead, use `npm run test:ui`.
 
 Example log:
 
@@ -223,6 +248,7 @@ The suite runs against a **real account**, so it follows strict rules:
 - **The E2E tests clean up after themselves.** Everything they create is named `QA-E2E <label> <run id>`, so runs never collide. Each test **starts** by removing leftovers from earlier runs, and **ends** with a teardown that always runs, even after a failure. After a full run the board is back to its original state.
 - **No paid AI credits are used.** No generation is triggered.
 - **No secrets are stored in the code.** Credentials come only from `.env`, which is git-ignored.
+- **The password never appears in a trace.** The login runs in a browser context that isn't recorded. The login tests type the password, and a trace records typed text, so those tests have no trace. Traces still contain the session token in network requests, so `reports/` is git-ignored and should not be shared publicly.
 
 ---
 
@@ -239,6 +265,7 @@ Pluma has **no `data-testid` attributes**, and its UI has several traps. Each on
 | Comboboxes with **no accessible name** | Filter comboboxes by the text they show |
 | A sidebar section that collapses **while the page is still rendering** | Wait for the link first, and expand the section only if needed |
 | A log hook in a shared file **applied only to the first spec file** | Replaced by an automatic Playwright fixture: every test gets its own log |
+| A saved Playwright session **logged the user out** in new contexts | Pluma keeps its token in `sessionStorage`, which `storageState()` doesn't save. It is saved separately and restored with an init script before the page loads |
 
 Locators that still need a test id from the developers are marked **⚠** in the code.
 
@@ -252,7 +279,7 @@ Locators that still need a test id from the developers are marked **⚠** in the
 ├── scripts/split-scenarios.ts                     # CSV → tests/scenarios/*.spec.ts generator
 ├── src/
 │   ├── configuration/    # config.yaml + .env, login, logger, report folders, custom reporter
-│   ├── fixtures/auth.ts  # logged-in page (one login per worker) + per-test log fixture
+│   ├── fixtures/auth.ts  # one login per worker, a traced logged-in page per test, per-test log
 │   ├── navigation/       # sidebar component and navigation TestPoints
 │   ├── pages/            # BasePage + one page object per route (24 routes)
 │   ├── testpoint/        # TestPoint class, ID helpers, JSON test case report, QA data naming

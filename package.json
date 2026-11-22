@@ -16,6 +16,7 @@
     "scenarios:generate": "tsx scripts/split-scenarios.ts",
     "typecheck": "tsc --noEmit",
     "report": "playwright show-report reports/latest/html",
+    "trace": "playwright show-trace",
     "codegen": "playwright codegen https://app.pluma.ai"
   },
   "devDependencies": {

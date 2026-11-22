@@ -10,3 +10,9 @@ auth:
 
 reports:
   root: reports
+
+# Playwright recording for every test: on | off | retain-on-failure | on-first-retry
+recording:
+  video: off
+  trace: on
+  screenshot: only-on-failure

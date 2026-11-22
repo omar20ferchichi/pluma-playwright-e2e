@@ -25,9 +25,10 @@ export default defineConfig({
     actionTimeout: 15_000,
     navigationTimeout: config.app.navigationTimeoutMs,
     launchOptions: { slowMo: config.app.slowMoMs },
-    screenshot: "only-on-failure",
-    video: "retain-on-failure",
-    trace: "retain-on-failure",
+    // Every test gets its own Playwright trace; video is off (config.yaml `recording`, or PLUMA_TRACE / PLUMA_VIDEO).
+    screenshot: config.recording.screenshot,
+    video: { mode: config.recording.video, size: { width: 1280, height: 720 } },
+    trace: { mode: config.recording.trace, snapshots: true, screenshots: true, sources: true },
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"], viewport: { width: 1920, height: 1080 } } }],
 });

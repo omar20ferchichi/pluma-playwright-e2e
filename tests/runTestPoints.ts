@@ -15,6 +15,7 @@ async function runPhase(page: Page, points: TestPoint[], phase: TestPointPhase):
   try {
     for (const point of points) {
       const title = `${phase === "teardown" ? "[teardown] " : ""}${point.id} ${point.description}`;
+      // Each TestPoint is a step: it is a group in the HTML report and in the Playwright trace.
       await test.step(title, async () => {
         await point.run(page);
       });
@@ -27,7 +28,7 @@ async function runPhase(page: Page, points: TestPoint[], phase: TestPointPhase):
 
 /**
  * Run TestPoints in order; the first failure stops the main steps.
- * Each TestPoint shows as a step in the HTML report, and the test case's JSON report
+ * Each TestPoint shows as a step in the HTML report and the trace, and the test case's JSON report
  * (reports/<run>/testcases/*.json) is written even when a TestPoint fails.
  */
 export async function runTestPoints(page: Page, points: TestPoint[], options: RunOptions = {}): Promise<void> {

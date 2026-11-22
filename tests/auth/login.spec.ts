@@ -9,7 +9,10 @@ import {
   OpenLoginPage,
 } from "../../src/pages/login.page";
 
-// Each test gets a fresh, logged-out browser context (no shared loggedInPage here).
+// Each test gets a fresh, logged-out browser context (no saved session).
+// AUTH-03 types the real password, and a trace records typed values: no trace for these tests.
+test.use({ storageState: { cookies: [], origins: [] }, trace: "off" });
+
 test.describe("Login", () => {
   test("AUTH-01 login form is shown", async ({ page }) => {
     await runTestPoints(page, [new OpenLoginPage(), new LoginAssertFormVisible()]);
