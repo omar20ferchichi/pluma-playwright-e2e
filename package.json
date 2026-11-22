@@ -1,0 +1,29 @@
+{
+  "name": "pluma-test",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Playwright TypeScript suite for Pluma (app.pluma.ai): page objects, TestPoints, and tests/",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:framework": "playwright test tests/framework tests/testpoints/registry.spec.ts",
+    "test:auth": "playwright test tests/auth",
+    "test:smoke": "playwright test tests/smoke",
+    "test:navigation": "playwright test tests/navigation",
+    "test:testpoints": "playwright test tests/testpoints",
+    "test:scenarios": "playwright test tests/scenarios",
+    "scenarios:generate": "tsx scripts/split-scenarios.ts",
+    "typecheck": "tsc --noEmit",
+    "report": "playwright show-report reports/latest/html",
+    "codegen": "playwright codegen https://app.pluma.ai"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^22.13.10",
+    "dotenv": "^16.4.7",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "yaml": "^2.7.0"
+  }
+}

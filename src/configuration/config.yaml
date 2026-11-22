@@ -1,0 +1,12 @@
+app:
+  base_url: https://app.pluma.ai
+  headless: true
+  slow_mo_ms: 0
+  navigation_timeout_ms: 30000
+
+auth:
+  login_path: /login
+  home_path: /app/dashboard
+
+reports:
+  root: reports

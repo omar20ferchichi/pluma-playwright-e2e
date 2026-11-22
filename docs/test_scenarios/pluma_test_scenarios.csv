@@ -1,0 +1,209 @@
+scenario_id,domain,summary,step,testpoint_id,testpoint_class,args,expected_result,phase
+NAV-01,Navigation,Sidebar reaches every main page,1,TP-OPEN-DASHBOARD,OpenDashboardPage,,Dashboard is open
+NAV-01,Navigation,Sidebar reaches every main page,2,TP-NAV-SIDEBAR-LINKS,SidebarAssertLinksVisible,,Every sidebar link is visible
+NAV-01,Navigation,Sidebar reaches every main page,3,TP-NAV-SIDEBAR,NavigateBySidebar,Article Generator,Lands on /app/documents
+NAV-01,Navigation,Sidebar reaches every main page,4,TP-NAV-SIDEBAR,NavigateBySidebar,Brand Voice,Lands on /app/brand-voice
+NAV-01,Navigation,Sidebar reaches every main page,5,TP-NAV-SIDEBAR,NavigateBySidebar,Topical Map,Lands on /app/tools/topical_map
+NAV-01,Navigation,Sidebar reaches every main page,6,TP-NAV-SIDEBAR,NavigateBySidebar,Calendar,Lands on /app/calendar
+NAV-01,Navigation,Sidebar reaches every main page,7,TP-NAV-SIDEBAR,NavigateBySidebar,LLM Brand Ranking,Lands on /app/llm-rank
+NAV-01,Navigation,Sidebar reaches every main page,8,TP-NAV-SIDEBAR,NavigateBySidebar,Pluma Art,Lands on /app/pluma-Art
+NAV-01,Navigation,Sidebar reaches every main page,9,TP-NAV-SIDEBAR,NavigateBySidebar,Pluma Humanize,Lands on /app/pluma-humanize
+NAV-01,Navigation,Sidebar reaches every main page,10,TP-NAV-SIDEBAR,NavigateBySidebar,Backlinks Analytics,Lands on /app/backlinks-analytics
+NAV-01,Navigation,Sidebar reaches every main page,11,TP-NAV-SIDEBAR,NavigateBySidebar,Keyword Intelligence,Lands on /app/tools/keyword_intelligence
+NAV-01,Navigation,Sidebar reaches every main page,12,TP-NAV-SIDEBAR,NavigateBySidebar,Templates,Lands on /app/templates
+NAV-01,Navigation,Sidebar reaches every main page,13,TP-NAV-SIDEBAR,NavigateBySidebar,Rewards,Lands on /app/rewards
+NAV-01,Navigation,Sidebar reaches every main page,14,TP-NAV-SIDEBAR,NavigateBySidebar,Settings,Lands on /settings
+NAV-01,Navigation,Sidebar reaches every main page,15,TP-NAV-SIDEBAR,NavigateBySidebar,Dashboard,Back on /app/dashboard
+NAV-02,Navigation,Workspace and user menus open and close,1,TP-OPEN-DASHBOARD,OpenDashboardPage,,Dashboard is open
+NAV-02,Navigation,Workspace and user menus open and close,2,TP-NAV-WORKSPACE-MENU,SidebarOpenWorkspaceMenu,,Menu shows Create a workspace and closes on Escape
+NAV-02,Navigation,Workspace and user menus open and close,3,TP-NAV-USER-MENU,SidebarOpenUserMenu,,Menu shows Dark mode and Logout and closes on Escape
+DASH-01,Dashboard,Brand Voice widget opens Brand Voice,1,TP-OPEN-DASHBOARD,OpenDashboardPage,,Dashboard is open
+DASH-01,Dashboard,Brand Voice widget opens Brand Voice,2,TP-ACT-DASHBOARD-01,DashboardOpenBrandVoiceFromWidget,,Lands on /app/brand-voice
+DOC-01,Article Generator,Document status filters and search,1,TP-OPEN-DOCUMENTS,OpenDocumentsPage,,Documents page is open
+DOC-01,Article Generator,Document status filters and search,2,TP-ACT-DOCUMENTS-01,DocumentsSearch,qa-search-term,Search box holds the text
+DOC-01,Article Generator,Document status filters and search,3,TP-ACT-DOCUMENTS-02,DocumentsShowStatusFilters,,Draft / In Review / Completed / Published are shown
+DOC-01,Article Generator,Document status filters and search,4,TP-ACT-DOCUMENTS-03,DocumentsSelectStatus,Draft,Draft is selected
+DOC-01,Article Generator,Document status filters and search,5,TP-ACT-DOCUMENTS-04,DocumentsResetFilter,,No status filter is selected
+BV-01,Brand Voice,New Voice dialog tabs (no generation),1,TP-OPEN-BRAND_VOICE,OpenBrandVoicePage,,Brand Voice page is open
+BV-01,Brand Voice,New Voice dialog tabs (no generation),2,TP-ACT-BRAND_VOICE-01,BrandVoiceOpenNewVoiceDialog,,New brand voice dialog is open
+BV-01,Brand Voice,New Voice dialog tabs (no generation),3,TP-ACT-BRAND_VOICE-03,BrandVoiceFillText,Sample text written by the QA suite.,Text area holds the text
+BV-01,Brand Voice,New Voice dialog tabs (no generation),4,TP-ACT-BRAND_VOICE-02,BrandVoiceSwitchTab,Extract from URL,URL field is shown
+BV-01,Brand Voice,New Voice dialog tabs (no generation),5,TP-ACT-BRAND_VOICE-04,BrandVoiceFillUrl,https://example.com,URL field holds the URL
+BV-01,Brand Voice,New Voice dialog tabs (no generation),6,TP-ACT-BRAND_VOICE-02,BrandVoiceSwitchTab,Paste your text,Text area is shown again
+BV-01,Brand Voice,New Voice dialog tabs (no generation),7,TP-ACT-BRAND_VOICE-05,BrandVoiceCloseDialog,,Dialog closes and nothing is generated
+TM-01,Topical Map,New Topic Research dialog (cancelled),1,TP-OPEN-TOPICAL_MAP,OpenTopicalMapPage,,Topical Map page is open
+TM-01,Topical Map,New Topic Research dialog (cancelled),2,TP-ACT-TOPICAL_MAP-01,TopicalMapOpenNewTopicDialog,,Dialog is open with topic input
+TM-01,Topical Map,New Topic Research dialog (cancelled),3,TP-ACT-TOPICAL_MAP-02,TopicalMapFillTopic,best SEO tool,Topic input holds the text
+TM-01,Topical Map,New Topic Research dialog (cancelled),4,TP-ACT-TOPICAL_MAP-03,TopicalMapCancelDialog,,Dialog closes and nothing is created
+CAL-01,Calendar,Switch between Board / Summary / List views,1,TP-OPEN-CALENDAR,OpenCalendarPage,,Calendar page is open
+CAL-01,Calendar,Switch between Board / Summary / List views,2,TP-ACT-CALENDAR-01,CalendarSwitchView,Summary,Summary view shows View all items
+CAL-01,Calendar,Switch between Board / Summary / List views,3,TP-ACT-CALENDAR-01,CalendarSwitchView,List,List view shows the select-all checkbox
+CAL-01,Calendar,Switch between Board / Summary / List views,4,TP-ACT-CALENDAR-01,CalendarSwitchView,Board,Board view shows the status columns
+CAL-01,Calendar,Switch between Board / Summary / List views,5,TP-ACT-CALENDAR-06,CalendarSearch,qa-task,Search box holds the text
+CAL-02,Calendar,Filters and Add Task dialogs (nothing saved),1,TP-OPEN-CALENDAR,OpenCalendarPage,,Calendar page is open
+CAL-02,Calendar,Filters and Add Task dialogs (nothing saved),2,TP-ACT-CALENDAR-02,CalendarOpenFilters,,FILTERS dialog is open
+CAL-02,Calendar,Filters and Add Task dialogs (nothing saved),3,TP-ACT-CALENDAR-05,CalendarCloseDialog,,Dialog closes
+CAL-02,Calendar,Filters and Add Task dialogs (nothing saved),4,TP-ACT-CALENDAR-03,CalendarOpenAddTask,,Add Standalone Task dialog is open
+CAL-02,Calendar,Filters and Add Task dialogs (nothing saved),5,TP-ACT-CALENDAR-04,CalendarFillTaskTitle,QA task (not saved),Title input holds the text
+CAL-02,Calendar,Filters and Add Task dialogs (nothing saved),6,TP-ACT-CALENDAR-05,CalendarCloseDialog,,Dialog closes and no task is created
+LLM-01,LLM Brand Ranking,Tracker wizard step 1 (cancelled),1,TP-OPEN-LLM_RANK,OpenLlmRankPage,,LLM Brand Ranking page is open
+LLM-01,LLM Brand Ranking,Tracker wizard step 1 (cancelled),2,TP-ACT-LLM_RANK-01,LlmRankStartTracker,,Lands on /app/llm-rank/discover
+LLM-01,LLM Brand Ranking,Tracker wizard step 1 (cancelled),3,TP-ACT-LLM_RANK-02,LlmRankFillWizardStep1,Acme|project management,Brand and Topic hold the values
+LLM-01,LLM Brand Ranking,Tracker wizard step 1 (cancelled),4,TP-ACT-LLM_RANK-03,LlmRankCancelWizard,,Leaves the wizard without creating a tracker
+ART-01,Pluma Art,Description and tabs (no generation),1,TP-OPEN-PLUMA_ART,OpenPlumaArtPage,,Pluma Art page is open
+ART-01,Pluma Art,Description and tabs (no generation),2,TP-ACT-PLUMA_ART-01,PlumaArtFillDescription,A paper plane over a city,Description holds the text
+ART-01,Pluma Art,Description and tabs (no generation),3,TP-ACT-PLUMA_ART-02,PlumaArtSwitchTab,Favourite,Favourite tab is selected
+ART-01,Pluma Art,Description and tabs (no generation),4,TP-ACT-PLUMA_ART-02,PlumaArtSwitchTab,Saved,Saved tab is selected
+HUM-01,Pluma Humanize,Type into the editor (not analyzed),1,TP-OPEN-PLUMA_HUMANIZE,OpenPlumaHumanizePage,,Pluma Humanize page is open
+HUM-01,Pluma Humanize,Type into the editor (not analyzed),2,TP-ACT-PLUMA_HUMANIZE-01,HumanizeTypeText,This sentence was typed by the QA suite.,Editor shows the text
+HUM-01,Pluma Humanize,Type into the editor (not analyzed),3,TP-ACT-PLUMA_HUMANIZE-02,HumanizeClearText,,Editor is empty
+LN-01,Link Network,Continue is disabled without a domain,1,TP-OPEN-LINK_NETWORK,OpenLinkNetworkPage,,Link Network page is open
+LN-01,Link Network,Continue is disabled without a domain,2,TP-ACT-LINK_NETWORK-01,LinkNetworkAssertContinueDisabled,,Continue with Existing Account is disabled
+BL-01,Backlinks Analytics,Domain input and history page,1,TP-OPEN-BACKLINKS,OpenBacklinksAnalyticsPage,,Backlinks Analytics page is open
+BL-01,Backlinks Analytics,Domain input and history page,2,TP-ACT-BACKLINKS-01,BacklinksFillDomain,example.com,Domain input holds the value
+BL-01,Backlinks Analytics,Domain input and history page,3,TP-ACT-BACKLINKS-02,BacklinksOpenHistory,,History page shows New Analysis
+KW-01,Keyword Intelligence,Keyword input and recent page,1,TP-OPEN-KEYWORDS,OpenKeywordIntelligencePage,,Keyword Intelligence page is open
+KW-01,Keyword Intelligence,Keyword input and recent page,2,TP-ACT-KEYWORDS-01,KeywordFillInput,content marketing,Keyword input holds the value
+KW-01,Keyword Intelligence,Keyword input and recent page,3,TP-ACT-KEYWORDS-02,KeywordOpenRecent,,Recent page shows New Keyword
+TPL-01,Templates,Filter search and open a template,1,TP-OPEN-TEMPLATES,OpenTemplatesPage,,Templates page is open
+TPL-01,Templates,Filter search and open a template,2,TP-ACT-TEMPLATES-01,TemplatesFilterCategory,SEO,SEO category is applied
+TPL-01,Templates,Filter search and open a template,3,TP-ACT-TEMPLATES-01,TemplatesFilterCategory,All,All templates are listed
+TPL-01,Templates,Filter search and open a template,4,TP-ACT-TEMPLATES-02,TemplatesSearch,AIDA,Search box holds AIDA
+TPL-01,Templates,Filter search and open a template,5,TP-ACT-TEMPLATES-03,TemplatesAssertCardVisible,AIDA,AIDA card is shown
+TPL-01,Templates,Filter search and open a template,6,TP-ACT-TEMPLATES-04,TemplatesAssertCardHidden,Tone Detector,Other templates are filtered out
+TPL-01,Templates,Filter search and open a template,7,TP-ACT-TEMPLATES-05,TemplatesOpenTemplate,AIDA,AIDA form is shown
+TPL-01,Templates,Filter search and open a template,8,TP-ACT-TEMPLATES-06,TemplateFillName,QA product,Name field holds the value
+TPL-01,Templates,Filter search and open a template,9,TP-ACT-TEMPLATES-07,TemplateBackToList,,Back on /app/templates
+SET-01,Settings,Settings tabs each open their own URL,1,TP-OPEN-SETTINGS,OpenSettingsPage,,Settings page is open
+SET-01,Settings,Settings tabs each open their own URL,2,TP-ACT-SETTINGS-01,SettingsSwitchTab,Account profile,Lands on /settings/account-profile
+SET-01,Settings,Settings tabs each open their own URL,3,TP-ACT-SETTINGS-01,SettingsSwitchTab,Workspace,Lands on /settings/workspace
+SET-01,Settings,Settings tabs each open their own URL,4,TP-ACT-SETTINGS-01,SettingsSwitchTab,Integrations,Lands on /settings/integrations
+SET-01,Settings,Settings tabs each open their own URL,5,TP-ACT-SETTINGS-01,SettingsSwitchTab,Billing,Lands on /settings/billing
+SET-01,Settings,Settings tabs each open their own URL,6,TP-ACT-SETTINGS-01,SettingsSwitchTab,Help center,Lands on /settings/help-center
+SET-01,Settings,Settings tabs each open their own URL,7,TP-ACT-SETTINGS-01,SettingsSwitchTab,Trash,Lands on /settings/trash
+SET-01,Settings,Settings tabs each open their own URL,8,TP-ACT-SETTINGS-01,SettingsSwitchTab,Settings,Back on /settings
+SET-02,Settings,Change password dialog (cancelled),1,TP-OPEN-ACCOUNT_PROFILE,OpenAccountProfilePage,,Account profile is open
+SET-02,Settings,Change password dialog (cancelled),2,TP-ACT-SETTINGS-02,AccountProfileOpenChangePassword,,Dialog shows the three password fields
+SET-02,Settings,Change password dialog (cancelled),3,TP-ACT-SETTINGS-03,SettingsCancelDialog,,Dialog closes and the password is unchanged
+SET-03,Settings,Contact support dialog (not sent),1,TP-OPEN-HELP_CENTER,OpenHelpCenterPage,,Help center is open
+SET-03,Settings,Contact support dialog (not sent),2,TP-ACT-SETTINGS-04,HelpCenterOpenContactUs,,Contact Pluma Support dialog is open
+SET-03,Settings,Contact support dialog (not sent),3,TP-ACT-SETTINGS-05,HelpCenterFillTicketTitle,QA ticket (not sent),Ticket title holds the text
+SET-03,Settings,Contact support dialog (not sent),4,TP-ACT-SETTINGS-03,SettingsCancelDialog,,Dialog closes and nothing is sent
+SET-04,Settings,Integrations sub-tabs,1,TP-OPEN-INTEGRATIONS,OpenIntegrationsPage,,Integrations is open
+SET-04,Settings,Integrations sub-tabs,2,TP-ACT-SETTINGS-06,IntegrationsSwitchSubTab,Publish|Wordpress,Publish shows Wordpress
+SET-04,Settings,Integrations sub-tabs,3,TP-ACT-SETTINGS-06,IntegrationsSwitchSubTab,Plagiarism|Copyscape,Plagiarism shows Copyscape
+SET-04,Settings,Integrations sub-tabs,4,TP-ACT-SETTINGS-06,IntegrationsSwitchSubTab,BYOK|Hunter io,BYOK shows Hunter io
+SET-04,Settings,Integrations sub-tabs,5,TP-ACT-SETTINGS-06,IntegrationsSwitchSubTab,SEO,SEO sub-tab is selected
+SET-04,Settings,Integrations sub-tabs,6,TP-ACT-SETTINGS-06,IntegrationsSwitchSubTab,Workflow,Workflow sub-tab is selected
+WS-01,Workspace,Workspace creation form (cancelled),1,TP-OPEN-WORKSPACE_CREATION,OpenWorkspaceCreationPage,,Create Workspace page is open
+WS-01,Workspace,Workspace creation form (cancelled),2,TP-ACT-WORKSPACE_CREATION-01,WorkspaceCreationFillName,QA workspace (not created),Name holds the value
+WS-01,Workspace,Workspace creation form (cancelled),3,TP-ACT-WORKSPACE_CREATION-02,WorkspaceCreationCancel,,Leaves the page and no workspace is created
+RW-01,Rewards,Rewards history and platforms,1,TP-OPEN-REWARDS,OpenRewardsPage,,Rewards page is open
+RW-01,Rewards,Rewards history and platforms,2,TP-ACT-REWARDS-01,RewardsOpenHistory,,Rewards history dialog is open
+RW-01,Rewards,Rewards history and platforms,3,TP-ACT-REWARDS-02,RewardsCloseDialog,,Dialog closes
+RW-01,Rewards,Rewards history and platforms,4,TP-ACT-REWARDS-03,RewardsSelectPlatform,G2,G2 is selected
+E2E-01,End-to-end,Create a task and delete it,1,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,No QA-E2E leftovers on the board,
+E2E-01,End-to-end,Create a task and delete it,2,TP-ACT-CALENDAR-09,CalendarCreateTask,E2E-01,Task is created and its card appears,
+E2E-01,End-to-end,Create a task and delete it,3,TP-ACT-CALENDAR-10,CalendarAssertTaskInColumn,E2E-01|Draft,New tasks land in Draft,
+E2E-01,End-to-end,Create a task and delete it,4,TP-ACT-CALENDAR-11,CalendarAssertTaskPriority,E2E-01|Medium,Default priority is Medium,
+E2E-01,End-to-end,Create a task and delete it,5,TP-ACT-CALENDAR-18,CalendarReloadBoard,,Board reloads,
+E2E-01,End-to-end,Create a task and delete it,6,TP-ACT-CALENDAR-10,CalendarAssertTaskInColumn,E2E-01|Draft,Task is saved on the server,
+E2E-01,End-to-end,Create a task and delete it,7,TP-ACT-CALENDAR-12,CalendarDeleteTask,E2E-01,Delete is confirmed and the card disappears,
+E2E-01,End-to-end,Create a task and delete it,8,TP-ACT-CALENDAR-18,CalendarReloadBoard,,Board reloads,
+E2E-01,End-to-end,Create a task and delete it,9,TP-ACT-CALENDAR-13,CalendarAssertTaskAbsent,E2E-01,Task is deleted on the server,
+E2E-01,End-to-end,Create a task and delete it,10,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,Nothing left behind,teardown
+E2E-02,End-to-end,Status and priority chosen at creation,1,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,No QA-E2E leftovers on the board,
+E2E-02,End-to-end,Status and priority chosen at creation,2,TP-ACT-CALENDAR-09,CalendarCreateTask,E2E-02|In Progress|High,Task is created as In Progress / High,
+E2E-02,End-to-end,Status and priority chosen at creation,3,TP-ACT-CALENDAR-10,CalendarAssertTaskInColumn,E2E-02|In Progress,Card is in the In Progress column,
+E2E-02,End-to-end,Status and priority chosen at creation,4,TP-ACT-CALENDAR-11,CalendarAssertTaskPriority,E2E-02|High,Card shows High,
+E2E-02,End-to-end,Status and priority chosen at creation,5,TP-ACT-CALENDAR-14,CalendarOpenTask,E2E-02,Edit Task dialog opens,
+E2E-02,End-to-end,Status and priority chosen at creation,6,TP-ACT-CALENDAR-15,CalendarAssertTaskFields,In Progress|High,Dialog shows the saved status and priority,
+E2E-02,End-to-end,Status and priority chosen at creation,7,TP-ACT-CALENDAR-05,CalendarCloseDialog,,Dialog closes,
+E2E-02,End-to-end,Status and priority chosen at creation,8,TP-ACT-CALENDAR-12,CalendarDeleteTask,E2E-02,Task is deleted,
+E2E-02,End-to-end,Status and priority chosen at creation,9,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,Nothing left behind,teardown
+E2E-03,End-to-end,Edit a task and the change persists,1,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,No QA-E2E leftovers on the board,
+E2E-03,End-to-end,Edit a task and the change persists,2,TP-ACT-CALENDAR-09,CalendarCreateTask,E2E-03 original,Task is created,
+E2E-03,End-to-end,Edit a task and the change persists,3,TP-ACT-CALENDAR-14,CalendarOpenTask,E2E-03 original,Edit Task dialog opens,
+E2E-03,End-to-end,Edit a task and the change persists,4,TP-ACT-CALENDAR-16,CalendarEditTask,E2E-03 edited|Edited by the QA E2E suite,Title and description are saved,
+E2E-03,End-to-end,Edit a task and the change persists,5,TP-ACT-CALENDAR-13,CalendarAssertTaskAbsent,E2E-03 original,Old title is gone,
+E2E-03,End-to-end,Edit a task and the change persists,6,TP-ACT-CALENDAR-18,CalendarReloadBoard,,Board reloads,
+E2E-03,End-to-end,Edit a task and the change persists,7,TP-ACT-CALENDAR-10,CalendarAssertTaskInColumn,E2E-03 edited|Draft,New title is saved on the server,
+E2E-03,End-to-end,Edit a task and the change persists,8,TP-ACT-CALENDAR-14,CalendarOpenTask,E2E-03 edited,Edit Task dialog opens,
+E2E-03,End-to-end,Edit a task and the change persists,9,TP-ACT-CALENDAR-19,CalendarAssertTaskDescription,Edited by the QA E2E suite,Description is saved,
+E2E-03,End-to-end,Edit a task and the change persists,10,TP-ACT-CALENDAR-05,CalendarCloseDialog,,Dialog closes,
+E2E-03,End-to-end,Edit a task and the change persists,11,TP-ACT-CALENDAR-12,CalendarDeleteTask,E2E-03 edited,Task is deleted,
+E2E-03,End-to-end,Edit a task and the change persists,12,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,Nothing left behind,teardown
+E2E-04,End-to-end,Move a task through the whole workflow,1,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,No QA-E2E leftovers on the board,
+E2E-04,End-to-end,Move a task through the whole workflow,2,TP-ACT-CALENDAR-09,CalendarCreateTask,E2E-04,Task is created,
+E2E-04,End-to-end,Move a task through the whole workflow,3,TP-ACT-CALENDAR-10,CalendarAssertTaskInColumn,E2E-04|Draft,Card starts in Draft,
+E2E-04,End-to-end,Move a task through the whole workflow,4,TP-ACT-CALENDAR-17,CalendarChangeTaskStatus,E2E-04|In Progress,Status saved as In Progress,
+E2E-04,End-to-end,Move a task through the whole workflow,5,TP-ACT-CALENDAR-10,CalendarAssertTaskInColumn,E2E-04|In Progress,Card moved to In Progress,
+E2E-04,End-to-end,Move a task through the whole workflow,6,TP-ACT-CALENDAR-17,CalendarChangeTaskStatus,E2E-04|In Review,Status saved as In Review,
+E2E-04,End-to-end,Move a task through the whole workflow,7,TP-ACT-CALENDAR-10,CalendarAssertTaskInColumn,E2E-04|In Review,Card moved to In Review,
+E2E-04,End-to-end,Move a task through the whole workflow,8,TP-ACT-CALENDAR-17,CalendarChangeTaskStatus,E2E-04|Completed,Status saved as Completed,
+E2E-04,End-to-end,Move a task through the whole workflow,9,TP-ACT-CALENDAR-10,CalendarAssertTaskInColumn,E2E-04|Completed,Card moved to Completed,
+E2E-04,End-to-end,Move a task through the whole workflow,10,TP-ACT-CALENDAR-18,CalendarReloadBoard,,Board reloads,
+E2E-04,End-to-end,Move a task through the whole workflow,11,TP-ACT-CALENDAR-10,CalendarAssertTaskInColumn,E2E-04|Completed,Completed is saved on the server,
+E2E-04,End-to-end,Move a task through the whole workflow,12,TP-ACT-CALENDAR-12,CalendarDeleteTask,E2E-04,Task is deleted,
+E2E-04,End-to-end,Move a task through the whole workflow,13,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,Nothing left behind,teardown
+E2E-05,End-to-end,Activity history records creation and edits,1,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,No QA-E2E leftovers on the board,
+E2E-05,End-to-end,Activity history records creation and edits,2,TP-ACT-CALENDAR-09,CalendarCreateTask,E2E-05,Task is created,
+E2E-05,End-to-end,Activity history records creation and edits,3,TP-ACT-CALENDAR-14,CalendarOpenTask,E2E-05,Edit Task dialog opens,
+E2E-05,End-to-end,Activity history records creation and edits,4,TP-ACT-CALENDAR-16,CalendarEditTask,E2E-05 renamed|History check,Title and description are changed,
+E2E-05,End-to-end,Activity history records creation and edits,5,TP-ACT-CALENDAR-14,CalendarOpenTask,E2E-05 renamed,Edit Task dialog opens,
+E2E-05,End-to-end,Activity history records creation and edits,6,TP-ACT-CALENDAR-22,CalendarAssertHistory,task created|title changed|description changed,History lists the three events,
+E2E-05,End-to-end,Activity history records creation and edits,7,TP-ACT-CALENDAR-05,CalendarCloseDialog,,Dialog closes,
+E2E-05,End-to-end,Activity history records creation and edits,8,TP-ACT-CALENDAR-12,CalendarDeleteTask,E2E-05 renamed,Task is deleted,
+E2E-05,End-to-end,Activity history records creation and edits,9,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,Nothing left behind,teardown
+E2E-06,End-to-end,Comment on a task and the comment persists,1,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,No QA-E2E leftovers on the board,
+E2E-06,End-to-end,Comment on a task and the comment persists,2,TP-ACT-CALENDAR-09,CalendarCreateTask,E2E-06,Task is created,
+E2E-06,End-to-end,Comment on a task and the comment persists,3,TP-ACT-CALENDAR-14,CalendarOpenTask,E2E-06,Edit Task dialog opens,
+E2E-06,End-to-end,Comment on a task and the comment persists,4,TP-ACT-CALENDAR-20,CalendarAddComment,Comment written by the QA E2E suite,Comment is posted,
+E2E-06,End-to-end,Comment on a task and the comment persists,5,TP-ACT-CALENDAR-21,CalendarAssertComment,Comment written by the QA E2E suite,Comment shows in the Comments tab,
+E2E-06,End-to-end,Comment on a task and the comment persists,6,TP-ACT-CALENDAR-05,CalendarCloseDialog,,Dialog closes,
+E2E-06,End-to-end,Comment on a task and the comment persists,7,TP-ACT-CALENDAR-18,CalendarReloadBoard,,Board reloads,
+E2E-06,End-to-end,Comment on a task and the comment persists,8,TP-ACT-CALENDAR-14,CalendarOpenTask,E2E-06,Edit Task dialog opens,
+E2E-06,End-to-end,Comment on a task and the comment persists,9,TP-ACT-CALENDAR-21,CalendarAssertComment,Comment written by the QA E2E suite,Comment is saved on the server,
+E2E-06,End-to-end,Comment on a task and the comment persists,10,TP-ACT-CALENDAR-05,CalendarCloseDialog,,Dialog closes,
+E2E-06,End-to-end,Comment on a task and the comment persists,11,TP-ACT-CALENDAR-12,CalendarDeleteTask,E2E-06,Task is deleted,
+E2E-06,End-to-end,Comment on a task and the comment persists,12,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,Nothing left behind,teardown
+E2E-07,End-to-end,Search finds one task and hides the others,1,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,No QA-E2E leftovers on the board,
+E2E-07,End-to-end,Search finds one task and hides the others,2,TP-ACT-CALENDAR-09,CalendarCreateTask,E2E-07 alpha,First task is created,
+E2E-07,End-to-end,Search finds one task and hides the others,3,TP-ACT-CALENDAR-09,CalendarCreateTask,E2E-07 beta,Second task is created,
+E2E-07,End-to-end,Search finds one task and hides the others,4,TP-ACT-CALENDAR-23,CalendarSearchTask,E2E-07 alpha,Only the alpha card is shown,
+E2E-07,End-to-end,Search finds one task and hides the others,5,TP-ACT-CALENDAR-13,CalendarAssertTaskAbsent,E2E-07 beta,Beta is hidden,
+E2E-07,End-to-end,Search finds one task and hides the others,6,TP-ACT-CALENDAR-06,CalendarSearch,zzz-no-such-task-qa,Search text is typed,
+E2E-07,End-to-end,Search finds one task and hides the others,7,TP-ACT-CALENDAR-13,CalendarAssertTaskAbsent,E2E-07 alpha,No card matches,
+E2E-07,End-to-end,Search finds one task and hides the others,8,TP-ACT-CALENDAR-06,CalendarSearch,,Search is cleared,
+E2E-07,End-to-end,Search finds one task and hides the others,9,TP-ACT-CALENDAR-10,CalendarAssertTaskInColumn,E2E-07 alpha|Draft,Alpha is back,
+E2E-07,End-to-end,Search finds one task and hides the others,10,TP-ACT-CALENDAR-10,CalendarAssertTaskInColumn,E2E-07 beta|Draft,Beta is back,
+E2E-07,End-to-end,Search finds one task and hides the others,11,TP-ACT-CALENDAR-12,CalendarDeleteTask,E2E-07 alpha,Alpha is deleted,
+E2E-07,End-to-end,Search finds one task and hides the others,12,TP-ACT-CALENDAR-12,CalendarDeleteTask,E2E-07 beta,Beta is deleted,
+E2E-07,End-to-end,Search finds one task and hides the others,13,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,Nothing left behind,teardown
+E2E-08,End-to-end,A task shows the same data in Board List and Summary,1,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,No QA-E2E leftovers on the board,
+E2E-08,End-to-end,A task shows the same data in Board List and Summary,2,TP-ACT-CALENDAR-24,CalendarRememberSummaryCount,In Review,In Review count is noted,
+E2E-08,End-to-end,A task shows the same data in Board List and Summary,3,TP-ACT-CALENDAR-07,CalendarOpenBoard,,Board is open,
+E2E-08,End-to-end,A task shows the same data in Board List and Summary,4,TP-ACT-CALENDAR-09,CalendarCreateTask,E2E-08|In Review|Low|Seen in every view,Task is created as In Review / Low,
+E2E-08,End-to-end,A task shows the same data in Board List and Summary,5,TP-ACT-CALENDAR-10,CalendarAssertTaskInColumn,E2E-08|In Review,Board: card is in In Review,
+E2E-08,End-to-end,A task shows the same data in Board List and Summary,6,TP-ACT-CALENDAR-26,CalendarAssertListRow,E2E-08|In Review|Low|Seen in every view,List: row shows status / priority / description,
+E2E-08,End-to-end,A task shows the same data in Board List and Summary,7,TP-ACT-CALENDAR-25,CalendarAssertSummaryCountIncreased,In Review|1,Summary: In Review count is one higher,
+E2E-08,End-to-end,A task shows the same data in Board List and Summary,8,TP-ACT-CALENDAR-07,CalendarOpenBoard,,Board is open,
+E2E-08,End-to-end,A task shows the same data in Board List and Summary,9,TP-ACT-CALENDAR-12,CalendarDeleteTask,E2E-08,Task is deleted,
+E2E-08,End-to-end,A task shows the same data in Board List and Summary,10,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,Nothing left behind,teardown
+E2E-09,End-to-end,Custom status column holds tasks and can be removed,1,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,No QA-E2E leftovers on the board,
+E2E-09,End-to-end,Custom status column holds tasks and can be removed,2,TP-ACT-CALENDAR-27,CalendarCreateStatusColumn,E2E-09 col,New column appears on the board,
+E2E-09,End-to-end,Custom status column holds tasks and can be removed,3,TP-ACT-CALENDAR-09,CalendarCreateTask,E2E-09|E2E-09 col,Task is created with the custom status,
+E2E-09,End-to-end,Custom status column holds tasks and can be removed,4,TP-ACT-CALENDAR-10,CalendarAssertTaskInColumn,E2E-09|E2E-09 col,Card is in the custom column,
+E2E-09,End-to-end,Custom status column holds tasks and can be removed,5,TP-ACT-CALENDAR-12,CalendarDeleteTask,E2E-09,Task is deleted,
+E2E-09,End-to-end,Custom status column holds tasks and can be removed,6,TP-ACT-CALENDAR-29,CalendarDeleteStatusColumn,E2E-09 col,Column delete is confirmed,
+E2E-09,End-to-end,Custom status column holds tasks and can be removed,7,TP-ACT-CALENDAR-18,CalendarReloadBoard,,Board reloads,
+E2E-09,End-to-end,Custom status column holds tasks and can be removed,8,TP-ACT-CALENDAR-28,CalendarAssertColumnAbsent,E2E-09 col,Column is deleted on the server,
+E2E-09,End-to-end,Custom status column holds tasks and can be removed,9,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,Nothing left behind,teardown
+E2E-10,End-to-end,Empty title and Cancel create nothing,1,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,No QA-E2E leftovers on the board,
+E2E-10,End-to-end,Empty title and Cancel create nothing,2,TP-ACT-CALENDAR-30,CalendarTryCreateWithoutTitle,,Create Task with no title keeps the dialog open,
+E2E-10,End-to-end,Empty title and Cancel create nothing,3,TP-ACT-CALENDAR-31,CalendarFillNewTaskTitle,E2E-10,Title is typed,
+E2E-10,End-to-end,Empty title and Cancel create nothing,4,TP-ACT-CALENDAR-32,CalendarCancelDialog,,Dialog closes,
+E2E-10,End-to-end,Empty title and Cancel create nothing,5,TP-ACT-CALENDAR-13,CalendarAssertTaskAbsent,E2E-10,No card was created,
+E2E-10,End-to-end,Empty title and Cancel create nothing,6,TP-ACT-CALENDAR-18,CalendarReloadBoard,,Board reloads,
+E2E-10,End-to-end,Empty title and Cancel create nothing,7,TP-ACT-CALENDAR-13,CalendarAssertTaskAbsent,E2E-10,Nothing was saved on the server,
+E2E-10,End-to-end,Empty title and Cancel create nothing,8,TP-ACT-CALENDAR-08,CalendarCleanupQaData,,Nothing left behind,teardown
