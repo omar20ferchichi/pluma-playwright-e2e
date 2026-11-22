@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit",
     "report": "playwright show-report reports/latest/html",
     "trace": "playwright show-trace",
+    "execution": "tsx scripts/execution.ts",
     "codegen": "playwright codegen https://app.pluma.ai"
   },
   "devDependencies": {

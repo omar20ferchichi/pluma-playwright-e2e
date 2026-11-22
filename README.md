@@ -59,6 +59,7 @@ npm run test:smoke       # fast check that login and the main pages work
 npm run test:scenarios   # the 31 business scenarios, E2E-01 … E2E-10 included
 npm test                 # the whole suite (114 tests, about 7 min)
 npm run report           # open the HTML report of the latest run
+npm run execution -- list   # every execution, with its result
 ```
 
 | `.env` variable | Purpose | Default |
@@ -238,6 +239,30 @@ Example log:
 Result: passed in 15.1s
 ```
 
+### Exporting and importing a whole execution
+
+An execution is one folder, `reports/<timestamp>/`, containing the HTML report (with its traces), the logs,
+the JSON reports and the summary. It can be moved to another machine as **one file** and opened there
+just like a local run, for example a run from CI, or a colleague's failing run:
+
+```bash
+npm run execution -- export                    # latest run → exports/pluma-execution-<run>.tar.gz
+npm run execution -- export 2026-11-22_22-32-19 --out run.tar.gz
+npm run execution -- import run.tar.gz         # → reports/<run>/ (or <run>_imported if it exists)
+npm run execution -- import some/folder --name ci-build-42
+npm run execution -- list                      # local and imported executions with their results
+npm run execution -- open ci-build-42          # HTML report; each test has "View trace"
+```
+
+```
+Execution                         Result    Tests  Passed  Failed  Source
+2026-11-22_22-32-19 (latest)      passed      114     114       0  local
+ci-build-42                       failed      114     112       2  imported
+```
+
+Imports accept `.tar.gz`, `.tgz`, `.zip`, or an execution folder. The exported file contains traces,
+which hold the test account's session token, so share it only with people you trust.
+
 ---
 
 ## Testing safely against a live account
@@ -277,6 +302,7 @@ Locators that still need a test id from the developers are marked **⚠** in the
 .
 ├── docs/test_scenarios/pluma_test_scenarios.csv   # test plan: single source of truth
 ├── scripts/split-scenarios.ts                     # CSV → tests/scenarios/*.spec.ts generator
+├── scripts/execution.ts                           # list / export / import / open a whole execution
 ├── src/
 │   ├── configuration/    # config.yaml + .env, login, logger, report folders, custom reporter
 │   ├── fixtures/auth.ts  # one login per worker, a traced logged-in page per test, per-test log
